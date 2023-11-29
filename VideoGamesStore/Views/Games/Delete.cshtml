@@ -1,15 +1,25 @@
 ﻿@model VideoGamesStore.Models.Data.Game
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Удалить";
 }
 
-<h1>Delete</h1>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Главная</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Games" asp-action="Index">Игры</a></li>
+        <li class="breadcrumb-item active">Удаление</li>
+    </ol>
+</nav>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>
+    <a class="btn text-dark" asp-action="Index" title="Вернуться к списку">
+        <i class="fas fa-arrow-left"></i>
+    </a>
+    Удаление игры
+</h3>
+<hr />
 <div>
-    <h4>Game</h4>
-    <hr />
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.NameGame)
@@ -51,7 +61,6 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Удалить" class="btn btn-danger" />
     </form>
 </div>

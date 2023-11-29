@@ -1,11 +1,23 @@
 ﻿@model VideoGamesStore.Models.Data.Game
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Поодробнее";
 }
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Главная</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Games" asp-action="Index">Игры</a></li>
+        <li class="breadcrumb-item active">Поодробнее</li>
+    </ol>
+</nav>
 
-<h1>Details</h1>
-
+<h3>
+    <a class="btn text-dark" asp-action="Index" title="Вернуться к списку">
+        <i class="fas fa-arrow-left"></i>
+    </a>
+    Поодробнее об игре
+</h3>
+<hr />
 <div>
     <h4>Game</h4>
     <hr />
@@ -47,8 +59,4 @@
             @Html.DisplayFor(model => model.Platform)
         </dd>
     </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
 </div>

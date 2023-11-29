@@ -44,13 +44,14 @@ namespace VideoGamesStore.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateGameModel model)
         {
-            if (_context.Games
-                .Where(f => f.NameGame == model.NameGame)
-                .Where(f => f.Country == model.Country)
-                .Where(f => f.GameDeveloper == model.GameDeveloper)
-                .Where(f => f.YearIssue == model.YearIssue)
-                .Where(f => f.GameDescription == model.GameDescription)
-                .Where(f => f.Platform == model.Platform)
+        
+             if (_context.Games
+                .Where(f => f.NameGame == model.NameGame &&
+                f.Country == model.Country &&
+                f.GameDeveloper == model.GameDeveloper &&
+                f.YearIssue == model.YearIssue &&
+                f.GameDescription == model.GameDescription &&
+                f.Platform == model.Platform)
                 .FirstOrDefault() != null)
             {
                 ModelState.AddModelError("", "Введеная игра уже существует");
@@ -110,12 +111,12 @@ namespace VideoGamesStore.Controllers
             Game game = await _context.Games.FindAsync(id);
 
             if (_context.Games
-                .Where(f => f.NameGame == model.NameGame)
-                .Where(f => f.Country == model.Country)
-                .Where(f => f.GameDeveloper == model.GameDeveloper)
-                .Where(f => f.YearIssue == model.YearIssue)
-                .Where(f => f.GameDescription == model.GameDescription)
-                .Where(f => f.Platform == model.Platform)
+                .Where(f => f.NameGame == model.NameGame && 
+                f.Country == model.Country && 
+                f.GameDeveloper == model.GameDeveloper && 
+                f.YearIssue == model.YearIssue && 
+                f.GameDescription == model.GameDescription && 
+                f.Platform == model.Platform)
                 .FirstOrDefault() != null)
             {
                 ModelState.AddModelError("", "Введеная игра уже существует");
@@ -152,7 +153,7 @@ namespace VideoGamesStore.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(game);
+            return View(model);
         }
 
         // GET: Games/Delete/5
