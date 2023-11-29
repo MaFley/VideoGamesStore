@@ -1,0 +1,65 @@
+﻿@model VideoGamesStore.ViewModels.Games.CreateGameModel
+
+﻿@{
+    ViewData["Title"] = "Создание - Игры";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Главная</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Games" asp-action="Index">Игры</a></li>
+        <li class="breadcrumb-item active">Создание</li>
+    </ol>
+</nav>
+
+<h3>
+    <a class="btn text-dark" asp-action="Index" title="Вернуться к списку">
+        <i class="fas fa-arrow-left"></i>
+    </a>
+    Добавление игры
+</h3>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" asp-controller="Games" asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NameGame" class="control-label"></label>
+                <input asp-for="NameGame" class="form-control" />
+                <span asp-validation-for="NameGame" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Country" class="control-label"></label>
+                <input asp-for="Country" class="form-control" />
+                <span asp-validation-for="Country" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GameDeveloper" class="control-label"></label>
+                <input asp-for="GameDeveloper" class="form-control" />
+                <span asp-validation-for="GameDeveloper" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="YearIssue" class="control-label"></label>
+                <input asp-for="YearIssue" class="form-control" />
+                <span asp-validation-for="YearIssue" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GameDescription" class="control-label"></label>
+                <input asp-for="GameDescription" class="form-control" />
+                <span asp-validation-for="GameDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Platform" class="control-label"></label>
+                <input asp-for="Platform" class="form-control" />
+                <span asp-validation-for="Platform" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Добавить" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
