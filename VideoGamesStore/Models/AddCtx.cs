@@ -13,5 +13,9 @@ namespace VideoGamesStore.Models
         }
 
         public DbSet<Game> Games { get; set; }
+
+        public DbSet<Order> Orders { get; set; }
+
+        public DbSet<VideoGamesStore.Models.Data.Order> Order { get; set; } = default!;
     }
 }

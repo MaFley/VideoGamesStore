@@ -15,21 +15,65 @@ namespace VideoGamesStore.Controllers
         private readonly AppCtx _context;
         private readonly UserManager<User> _userManager;
 
-        public GamesController(AppCtx context, UserManager<User> user)
+        public GamesController(
+        AppCtx context,
+        UserManager<User> user)
         {
             _context = context;
             _userManager = user;
         }
 
         // GET: Games
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(
+        string sortOrder,
+        string currentFilter,
+        string searchString,
+        int? pageNumber)
         {
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
+            var games = from s in _context.Games
+                           select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                games = games.Where(s => s.NameGame.Contains(searchString)
+                                      );
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    games = games.OrderByDescending(s => s.NameGame);
+                    break;
+                case "Date":
+                    games = games.OrderBy(s => s.YearIssue);
+                    break;
+                case "date_desc":
+                    games = games.OrderByDescending(s => s.YearIssue);
+                    break;
+                default:
+                    games = games.OrderBy(s => s.NameGame);
+                    break;
+            }
             //IdentityUser user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
 
             var appCtx = _context.Games
                 .OrderBy(f => f.NameGame);
 
-            return View(await appCtx.ToListAsync());
+            int pageSize = 3;
+            return View((await PaginatedList<Game>.CreateAsync(games.AsNoTracking(), pageNumber ?? 1, pageSize)));
         }
 
         

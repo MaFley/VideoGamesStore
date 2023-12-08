@@ -6,6 +6,7 @@ namespace VideoGamesStore.Models.Data
     public class Game
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Display(Name = "ИД")]
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Введите название игры")]
@@ -31,6 +32,8 @@ namespace VideoGamesStore.Models.Data
         [Required(ErrorMessage = "Введите платформу")]
         [Display(Name = "Платформа")]
         public string Platform { get; set; }
+
+        public ICollection<Order> Orders { get; set; }
 
     }
 }

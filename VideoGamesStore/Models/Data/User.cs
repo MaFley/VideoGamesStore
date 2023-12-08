@@ -6,13 +6,15 @@ namespace VideoGamesStore.Models.Data
 {
     public class User : IdentityUser
     {
-        [Required(ErrorMessage = "Введите фамилию")]
+        [Required(ErrorMessage = "Введите никнейм")]
 
         //отображение Фамилия вместо LastName
         [Display(Name = "Введите никнейм")]
         public string NickName { get; set; }
 
         [Display(Name = "Дата регистрации")]
-        public string DateOfReg { get; set; }
+        public DateTime DateOfReg { get; set; }
+
+        public ICollection<Order> Orders { get; set; }
     }
 }
