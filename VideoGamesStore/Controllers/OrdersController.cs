@@ -32,7 +32,7 @@ namespace VideoGamesStore.Controllers
             var appCtx = _context.Orders
                 .Include(f => f.User) // и связываем с таблицей пользователи через класс User
                 .Include(f => f.Game)  // устанавливается условие с выбором записей форм обучения текущего пользователя по его Id
-                .OrderBy(f => f.OrderDate);          // сортируем все записи по имени форм обучения
+                .OrderBy(f => f.OrderDate.);          // сортируем все записи по имени форм обучения
 
             // возвращаем в представление полученный список записей
             return View(await appCtx.ToListAsync());
