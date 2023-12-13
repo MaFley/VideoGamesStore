@@ -16,6 +16,10 @@ namespace VideoGamesStore.Models
 
         public DbSet<Order> Orders { get; set; }
 
+        public DbSet<Review> Reviews { get; set; }
+
         public DbSet<VideoGamesStore.Models.Data.Order> Order { get; set; } = default!;
+
+        public DbSet<VideoGamesStore.Models.Data.Review> Review { get; set; } = default!;
     }
 }

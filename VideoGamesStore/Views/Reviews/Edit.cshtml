@@ -1,13 +1,13 @@
-﻿@model VideoGamesStore.ViewModels.Orders.EditOrderModel
+﻿@model VideoGamesStore.ViewModels.Reviews.EditReviewViewModel
 
 ﻿@{
-    ViewData["Title"] = "Изменение - Игры";
+    ViewData["Title"] = "Изменение - Отзыва";
 }
 
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Главная</a></li>
-        <li class="breadcrumb-item"><a asp-controller="Orders" asp-action="Index">Заказ</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Orders" asp-action="Index">Отзывы</a></li>
         <li class="breadcrumb-item active">Изменение</li>
     </ol>
 </nav>
@@ -16,7 +16,7 @@
     <a class="btn text-dark" asp-action="Index" title="Вернуться к списку">
         <i class="fas fa-arrow-left"></i>
     </a>
-    Изменение заказа
+    Изменение отзыва
 </h3>
 <hr />
 <div class="row">
@@ -24,13 +24,18 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="IdGame" class="control-label"></label>
-                <select asp-for="IdGame" class="form-control" asp-items="ViewBag.IdGame"></select>
+                <label asp-for="Rating" class="control-label"></label>
+                <input asp-for="Rating" class="form-control" />
+                <span asp-validation-for="Rating" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Count" class="control-label"></label>
-                <input asp-for="Count" class="form-control" />
-                <span asp-validation-for="Count" class="text-danger"></span>
+                <label asp-for="ReviewText" class="control-label"></label>
+                <input asp-for="ReviewText" class="form-control" />
+                <span asp-validation-for="ReviewText" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdGame" class="control-label"></label>
+                <select asp-for="IdGame" class="form-control" asp-items="ViewBag.IdGame"></select>
             </div>
             <div class="mb-3">
                 <input type="submit" value="Edit" class="btn btn-primary" />

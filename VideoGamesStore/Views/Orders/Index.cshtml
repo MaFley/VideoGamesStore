@@ -11,6 +11,7 @@
         <li class="breadcrumb-item active">Заказы</li>
     </ol>
 </nav>
+<h2></h2>
 <h2>Заказ</h2>
 
 <h6>
@@ -37,7 +38,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                    @Html.DisplayFor(modelItem => item.Game.NameGame)
+                @Html.DisplayFor(modelItem => item.Game.NameGame)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.OrderDate)
@@ -46,9 +47,17 @@
                 @Html.DisplayFor(modelItem => item.Count)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Редактировать</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Поодробнение</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
+            
+                <a class="btn text-dark" asp-action="Details" asp-route-id="@item.Id" title="Посмотреть подробнее">
+                    <i class="far fa-eye"></i>
+                </a> |
+                <a class="btn text-dark" asp-action="Edit" asp-route-id="@item.Id" title="Редактировать">
+                    <i class="fas fa-pencil-alt"></i>
+                </a> |
+                <a class="btn text-dark" asp-action="Delete" asp-route-id="@item.Id" title="Удалить">
+                    <i class="far fa-minus-square"></i>
+                </a> |
+            
             </td>
         </tr>
 }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<VideoGamesStore.Models.Data.Game>
+﻿@model PaginatedList<VideoGamesStore.Models.Data.Game>
 
 @{
     ViewData["Title"] = "Игры";
@@ -23,22 +23,22 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.NameGame)
+                Название игры
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Country)
+               Страна
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.GameDeveloper)
+                Разработчик игры
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.YearIssue)
+               Год издания
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.GameDescription)
+                Описание игры
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Platform)
+                Платформа
             </th>
             <th></th>
         </tr>
@@ -65,17 +65,39 @@
                 @Html.DisplayFor(modelItem => item.Platform)
             </td>
             <td>
-               <a class="btn text-dark" asp-action="Details" asp-route-id="@item.Id" title="Посмотреть подробнее">
-                        <i class="far fa-eye"></i>
-                    </a> |
-                    <a class="btn text-dark" asp-action="Edit" asp-route-id="@item.Id" title="Редактировать">
-                        <i class="fas fa-pencil-alt"></i>
-                    </a> |
-                    <a class="btn text-dark" asp-action="Delete" asp-route-id="@item.Id" title="Удалить">
-                        <i class="far fa-minus-square"></i>
-                    </a> |
+               
+                <a class="btn text-dark" asp-action="Details" asp-route-id="@item.Id" title="Посмотреть подробнее">
+                    <i class="far fa-eye"></i>
+                </a> |
+                <a class="btn text-dark" asp-action="Edit" asp-route-id="@item.Id" title="Редактировать">
+                    <i class="fas fa-pencil-alt"></i>
+                </a> |
+                <a class="btn text-dark" asp-action="Delete" asp-route-id="@item.Id" title="Удалить">
+                    <i class="far fa-minus-square"></i>
+                </a> |
+                
             </td>
         </tr>
 }
     </tbody>
 </table>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @prevDisabled">
+    Previous
+</a>
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @nextDisabled">
+    Next
+</a>
